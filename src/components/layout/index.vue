@@ -2,14 +2,14 @@
   <a-config-provider
     :theme="{
       token: {
-        colorPrimary: '#319891',
+        colorPrimary: '#319891'
       },
       components: {
         Menu: {
-          colorItemBg: '#f0f0f0',
-        },
+          colorItemBg: '#f0f0f0'
+        }
       },
-      algorithm: theme.defaultAlgorithm,
+      algorithm: theme.defaultAlgorithm
     }"
   >
     <a-layout class="layout">
@@ -27,10 +27,20 @@
         <a-layout-content>Content</a-layout-content>
         <a-layout-footer style="background-color: #fff">
           <span>技术说明:&nbsp;&nbsp;&nbsp;</span>
-          <a-tag color="#026e00">nodeJs</a-tag>
-          <a-tag color="#38a875">Vue3</a-tag>
-          <a-tag color="#ffd859">Pinia</a-tag>
-          <a-tag></a-tag>
+          <a-tag
+            class="tag"
+            v-for="item in tagList"
+            :key="item.text"
+            :color="item.color"
+            >{{ item.text }}</a-tag
+          >
+          <span style="margin-left: 50px">社区:&nbsp;&nbsp;&nbsp;</span>
+          <a-tag class="tag" @click="goLink('github')" color="#000">
+            <template #icon>
+              <GithubOutlined />
+            </template>
+            GitHub
+          </a-tag>
         </a-layout-footer>
       </a-layout>
     </a-layout>
@@ -38,30 +48,60 @@
 </template>
 
 <script setup lang="ts">
-import { h, ref } from "vue";
-import { HomeOutlined } from "@ant-design/icons-vue";
-import { theme } from "ant-design-vue";
+import { h, ref } from 'vue'
+import { HomeOutlined, GithubOutlined } from '@ant-design/icons-vue'
+import { theme } from 'ant-design-vue'
 
 interface Meun {
-  key: string;
-  icon?: any;
-  label: string;
+  key: string
+  icon?: any
+  label: string
 }
 
-const select = ref([]);
+const select = ref([])
 const meunList = ref<Array<Meun>>([
   {
-    key: "1",
-    label: "首页",
-    icon: () => h(HomeOutlined),
+    key: '1',
+    label: '首页',
+    icon: () => h(HomeOutlined)
+  }
+])
+
+const tagList = ref([
+  {
+    text: 'NodeJs',
+    color: '#026e00'
   },
-]);
+  {
+    text: 'Vue3',
+    color: '#38a875'
+  },
+  {
+    text: 'Pinia',
+    color: '#ffd859'
+  },
+  {
+    text: 'Antd',
+    color: '#1182ff'
+  }
+])
+const linkList: { [key: string]: string } = {
+  github: 'https://github.com/orange200308/orange-utils'
+}
+const goLink = (link: string) => {
+  window.open(linkList[link], '_blank')
+  console.log("link");
+  
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .layout {
   width: 100%;
   height: 100%;
-  /* color: #0dff00; */
+  .tag {
+    cursor: pointer;
+    user-select: none;
+  }
 }
 </style>
