@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import route from '@/router/index.ts'
-import Antd, { ConfigProvider } from 'ant-design-vue'
+import Antd from 'ant-design-vue'
 import './style.css'
 import 'ant-design-vue/dist/reset.css'
 import App from './App.vue'

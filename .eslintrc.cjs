@@ -1,0 +1,33 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true
+  },
+  extends: ['standard-with-typescript', 'plugin:vue/vue3-essential'],
+  overrides: [
+    {
+      env: {
+        node: true
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script'
+      }
+    }
+  ],
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    tsconfigRootDir: __dirname,
+    project: ['tsconfig.json'],
+    extraFileExtensions: ['.vue'],
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  },
+  plugins: ['vue'],
+  rules: {
+    'vue/multi-word-component-names': 0, // 不检测文件名
+    '@typescript-eslint/no-explicit-any': 2 // 禁止使用any
+  }
+}

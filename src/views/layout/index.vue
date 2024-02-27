@@ -6,7 +6,7 @@
       },
       components: {
         Menu: {
-          colorItemBg: '#f0f0f0'
+          colorItemBg: '#f5f5f5'
         }
       },
       algorithm: theme.defaultAlgorithm
@@ -21,8 +21,8 @@
           :items="meunList"
       /></a-layout-sider>
       <a-layout>
-        <a-layout-header style="background-color: #fff"
-          ><H3>🍊Orange Utils</H3></a-layout-header
+        <a-layout-header style="background-color: #ffffff"
+          ><h3>🍊Orange Utils</h3></a-layout-header
         >
         <a-layout-content>Content</a-layout-content>
         <a-layout-footer style="background-color: #fff">
@@ -48,18 +48,18 @@
 </template>
 
 <script setup lang="ts">
-import { h, ref } from 'vue'
+import { type VNode, h, ref } from 'vue'
 import { HomeOutlined, GithubOutlined } from '@ant-design/icons-vue'
 import { theme } from 'ant-design-vue'
 
 interface Meun {
   key: string
-  icon?: any
+  icon?: () => VNode
   label: string
 }
 
 const select = ref([])
-const meunList = ref<Array<Meun>>([
+const meunList = ref<Meun[]>([
   {
     key: '1',
     label: '首页',
@@ -85,13 +85,12 @@ const tagList = ref([
     color: '#1182ff'
   }
 ])
-const linkList: { [key: string]: string } = {
+const linkList: Record<string, string> = {
   github: 'https://github.com/orange200308/orange-utils'
 }
-const goLink = (link: string) => {
+const goLink = (link: string): void => {
   window.open(linkList[link], '_blank')
-  console.log("link");
-  
+  console.log('link')
 }
 </script>
 
