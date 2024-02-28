@@ -15,6 +15,7 @@
     <a-layout class="layout">
       <a-layout-sider theme="light"
         ><a-menu
+          @select="checkMenu"
           v-model:selectedKeys="select"
           style="width: 200px"
           mode="vertical"
@@ -24,7 +25,9 @@
         <a-layout-header style="background-color: #ffffff"
           ><h3>🍊Orange Utils</h3></a-layout-header
         >
-        <a-layout-content>Content</a-layout-content>
+        <a-layout-content>
+          <router-view></router-view>
+        </a-layout-content>
         <a-layout-footer style="background-color: #fff">
           <span>技术说明:&nbsp;&nbsp;&nbsp;</span>
           <a-tag
@@ -49,23 +52,40 @@
 
 <script setup lang="ts">
 import { type VNode, h, ref } from 'vue'
-import { HomeOutlined, GithubOutlined } from '@ant-design/icons-vue'
+import {
+  HomeOutlined,
+  GithubOutlined,
+  PictureOutlined
+} from '@ant-design/icons-vue'
 import { theme } from 'ant-design-vue'
+import router from '@/router'
 
 interface Meun {
   key: string
   icon?: () => VNode
   label: string
+  path: string
 }
 
 const select = ref([])
 const meunList = ref<Meun[]>([
   {
-    key: '1',
+    key: '0',
     label: '首页',
-    icon: () => h(HomeOutlined)
+    icon: () => h(HomeOutlined),
+    path: '/home'
+  },
+  {
+    key: '1',
+    label: '图片压缩',
+    icon: () => h(PictureOutlined),
+    path: '/imgZip'
   }
 ])
+// 跳转页面
+const checkMenu = (e: { item: { path: string } }): void => {
+  void router.push(e.item.path)
+}
 
 const tagList = ref([
   {
@@ -90,7 +110,6 @@ const linkList: Record<string, string> = {
 }
 const goLink = (link: string): void => {
   window.open(linkList[link], '_blank')
-  console.log('link')
 }
 </script>
 

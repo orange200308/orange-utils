@@ -4,21 +4,26 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: '',
-    component: null,
+    component: async () => await import('@/views/layout/index.vue'),
     redirect: '/home',
     children: [
       {
         path: '/home',
         name: 'home',
-        component: async () => await import('@/views/layout/index.vue')
+        component: async () => await import('@/views/home/index.vue')
+      },
+      {
+        path: '/imgZip',
+        name: 'imgZip',
+        component: async () => await import('@/views/imageZip/index.vue')
       }
     ]
   }
 ]
 
-const route = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes
 })
 
-export default route
+export default router

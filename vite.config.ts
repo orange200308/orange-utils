@@ -10,6 +10,6 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src')
     },
-    extensions: ['.js', '.json', 'ts']
+    extensions: ['.js', '.json', '.ts']
   }
 })
